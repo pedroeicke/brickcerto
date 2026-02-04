@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { HelmetProvider } from 'react-helmet-async';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -112,14 +113,16 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col min-h-screen font-sans text-gray-900">
-      <Header onNavigate={navigate} session={session} />
+    <HelmetProvider>
+      <div className="flex flex-col min-h-screen font-sans text-gray-900">
+        <Header onNavigate={navigate} session={session} />
 
-      <main className="flex-grow">
-        {renderPage()}
-      </main>
-      <Footer />
-    </div>
+        <main className="flex-grow">
+          {renderPage()}
+        </main>
+        <Footer />
+      </div>
+    </HelmetProvider>
   );
 };
 

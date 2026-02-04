@@ -5,6 +5,7 @@ import { Ad } from '../types';
 import { CATEGORIES, CATEGORY_DB_MAPPING, SUBCATEGORY_DB_MAPPING, STATES } from '../constants';
 import AdCard from '../components/AdCard';
 import { Icon } from '../components/Icon';
+import SEO from '../components/SEO';
 
 interface ListingProps {
   onNavigate: (page: string, params?: any) => void;
@@ -386,8 +387,34 @@ const Listing: React.FC<ListingProps> = ({ onNavigate, params }) => {
 
   const selectedCategoryData = CATEGORIES.find(c => c.id === filters.category);
 
+  // Dynamic SEO Title Construction
+  let seoTitle = 'Anúncios de Classificados';
+  let seoDesc = 'Encontre tudo o que precisa no Brick Certo.';
+  const keywords = ['classificados', 'comprar', 'vender'];
+
+  if (filters.category) {
+    const catName = filters.subcategory && filters.subcategory !== 'undefined' ? filters.subcategory : selectedCategoryData?.name || filters.category;
+    seoTitle = `${catName} ${filters.state ? `em ${filters.state}` : 'no Brasil'}`;
+    seoDesc = `Encontre ${catName} ${filters.state ? `em ${filters.state}` : 'em todo o Brasil'}. As melhores opções de ${catName} você encontra aqui.`;
+    keywords.push(catName.toLowerCase(), `comprar ${catName.toLowerCase()}`);
+
+    if (filters.state) {
+      keywords.push(`${catName.toLowerCase()} ${filters.state.toLowerCase()}`);
+    }
+
+    if (filters.category === 'acompanhantes') {
+      seoTitle = `Acompanhantes e Garotas de Programa ${filters.state ? `em ${filters.state}` : ''} | Brick Certo`;
+      keywords.push('garotas de programa', 'acompanhantes de luxo', 'massagem erótica');
+    }
+  }
+
   return (
     <div className="bg-gray-50 min-h-screen pt-8 pb-16">
+      <SEO
+        title={seoTitle}
+        description={seoDesc}
+        keywords={keywords}
+      />
       <div className="container mx-auto px-4">
 
         {/* Breadcrumb & Header */}

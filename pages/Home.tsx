@@ -8,6 +8,7 @@ import { Icon } from '../components/Icon';
 import AdCard from '../components/AdCard';
 import CategoryCarousel from '../components/CategoryCarousel';
 import AdultContentModal from '../components/AdultContentModal';
+import SEO from '../components/SEO';
 
 interface HomeProps {
   onNavigate: (page: string, params?: any) => void;
@@ -93,6 +94,18 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
+      <SEO
+        title="Classificados Premium"
+        description="Encontre garotas de programa, acompanhantes, massagistas e muito mais no maior portal de classificados do Brasil. Anúncios grátis e verificados."
+        keywords={[
+          'acompanhantes', 'garotas de programa', 'massagem', 'massagem nuru',
+          'acompanhantes em floripa', 'vender carro', 'comprar imóvel',
+          'classificados sc', 'acompanhantes sao paulo', 'acompanhantes rio de janeiro',
+          'acompanhantes curitiba', 'acompanhantes porto alegre', 'acompanhantes belo horizonte',
+          'acompanhantes brasilia', 'acompanhantes salvador', 'acompanhantes fortaleza',
+          'garota de programa', 'classificados gratis'
+        ]}
+      />
 
       {/* Category Carousel (FloripaLocal Style) */}
       <CategoryCarousel onSelectCategory={handleCategorySelect} selectedId={selectedCategory} />
@@ -144,6 +157,26 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
               Carregar mais anúncios
             </button>
           </div>
+        </section>
+
+        {/* SEO Internal Linking / Programmatic SEO Links */}
+        <section className="bg-white rounded-lg p-6 shadow-sm border border-gray-100">
+          <h3 className="text-lg font-bold text-gray-900 mb-4">Buscas Populares por Cidade</h3>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+            {['São Paulo', 'Rio de Janeiro', 'Florianópolis', 'Curitiba', 'Belo Horizonte', 'Porto Alegre', 'Salvador', 'Brasília'].map(city => (
+              <div key={city} className="space-y-2">
+                <h4 className="font-semibold text-gray-700">{city}</h4>
+                <ul className="space-y-1 text-gray-500">
+                  <li><button onClick={() => onNavigate('listing', { category: 'acompanhantes', state: 'SC' })} className="hover:text-brand-red hover:underline text-left">Acompanhantes em {city}</button></li>
+                  <li><button onClick={() => onNavigate('listing', { category: 'autos', state: 'SC' })} className="hover:text-brand-red hover:underline text-left">Carros em {city}</button></li>
+                  <li><button onClick={() => onNavigate('listing', { category: 'imoveis', state: 'SC' })} className="hover:text-brand-red hover:underline text-left">Imóveis em {city}</button></li>
+                </ul>
+              </div>
+            ))}
+          </div>
+          <p className="text-xs text-gray-400 mt-6 pt-4 border-t border-gray-100">
+            Encontre garotas de programa, massagistas e acompanhantes de luxo em todo o Brasil. O Brick Certo é o seu portal seguro e discreto para classificados adultos e muito mais.
+          </p>
         </section>
 
         {/* Official Stores / Partners section removed as per user request (no mock data) */}
