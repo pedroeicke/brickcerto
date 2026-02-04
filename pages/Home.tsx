@@ -95,8 +95,8 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
       <SEO
-        title="Classificados Premium"
-        description="Encontre garotas de programa, acompanhantes, massagistas e muito mais no maior portal de classificados do Brasil. Anúncios grátis e verificados."
+        title="Compre, Venda e Encontre Tudo"
+        description="Encontre garotas de programa, acompanhantes, carros usados, imóveis e empregos no Brick Certo. O melhor classificado do Brasil."
         keywords={[
           'acompanhantes', 'garotas de programa', 'massagem', 'massagem nuru',
           'acompanhantes em floripa', 'vender carro', 'comprar imóvel',

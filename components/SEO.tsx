@@ -19,7 +19,7 @@ const SEO: React.FC<SEOProps> = ({
     image = '/og-image.jpg',
     noindex = false
 }) => {
-    const siteTitle = 'Brick Certo - Classificados Premium';
+    const siteTitle = 'Brick Certo - Carros, Acompanhantes, Imóveis e Empregos';
     const fullTitle = title === siteTitle ? title : `${title} | ${siteTitle}`;
     const currentUrl = typeof window !== 'undefined' ? window.location.href : '';
     const canonicalUrl = canonical || currentUrl.split('?')[0];
