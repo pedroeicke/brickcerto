@@ -99,11 +99,12 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
         description="Encontre garotas de programa, acompanhantes, carros usados, imóveis e empregos no Brick Certo. O melhor classificado do Brasil."
         keywords={[
           'acompanhantes', 'garotas de programa', 'massagem', 'massagem nuru',
+          'garota de programa em são paulo', 'garota de programa em rio de janeiro',
+          'garota de programa em curitiba', 'garota de programa em florianópolis',
+          'garota de programa em belo horizonte', 'garota de programa em porto alegre',
+          'garota de programa em brasília', 'garota de programa em salvador',
           'acompanhantes em floripa', 'vender carro', 'comprar imóvel',
-          'classificados sc', 'acompanhantes sao paulo', 'acompanhantes rio de janeiro',
-          'acompanhantes curitiba', 'acompanhantes porto alegre', 'acompanhantes belo horizonte',
-          'acompanhantes brasilia', 'acompanhantes salvador', 'acompanhantes fortaleza',
-          'garota de programa', 'classificados gratis'
+          'classificados sc', 'garotas de programa brasil', 'classificados gratis'
         ]}
       />
 

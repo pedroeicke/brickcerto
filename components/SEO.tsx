@@ -24,10 +24,15 @@ const SEO: React.FC<SEOProps> = ({
     const currentUrl = typeof window !== 'undefined' ? window.location.href : '';
     const canonicalUrl = canonical || currentUrl.split('?')[0];
 
-    // Default SEO keywords including adult services as requested
+    // Default SEO keywords including specific city combinations
     const defaultKeywords = [
         'classificados', 'brick certo', 'comprar', 'vender',
         'garotas de programa', 'acompanhantes', 'massagem', 'massagem nuru',
+        'garota de programa em são paulo', 'garota de programa em rio de janeiro',
+        'garota de programa em curitiba', 'garota de programa em belo horizonte',
+        'garota de programa em porto alegre', 'garota de programa em brasília',
+        'garota de programa em salvador', 'garota de programa em fortaleza',
+        'garota de programa em florianópolis', 'garota de programa em recife',
         'acompanhantes em floripa', 'garotas de programa brasil',
         'imóveis', 'carros', 'empregos'
     ];
