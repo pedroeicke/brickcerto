@@ -1,6 +1,5 @@
 
-import React from 'react';
-import { Helmet, HelmetProvider } from 'react-helmet-async';
+import React, { useEffect } from 'react';
 
 interface SEOProps {
     title: string;
@@ -39,32 +38,64 @@ const SEO: React.FC<SEOProps> = ({
 
     const finalKeywords = keywords.length > 0 ? keywords : defaultKeywords;
 
-    return (
-        <Helmet>
-            {/* Basic Meta Tags */}
-            <title>{fullTitle}</title>
-            <meta name="description" content={description} />
-            <meta name="keywords" content={finalKeywords.join(', ')} />
-            <link rel="canonical" href={canonicalUrl} />
-            {noindex && <meta name="robots" content="noindex, nofollow" />}
+    useEffect(() => {
+        if (typeof document === 'undefined') return;
 
-            {/* Open Graph / Facebook */}
-            <meta property="og:type" content="website" />
-            <meta property="og:url" content={canonicalUrl} />
-            <meta property="og:title" content={fullTitle} />
-            <meta property="og:description" content={description} />
-            <meta property="og:image" content={image} />
+        const upsertMetaByName = (name: string, content: string) => {
+            let el = document.head.querySelector<HTMLMetaElement>(`meta[name="${name}"]`);
+            if (!el) {
+                el = document.createElement('meta');
+                el.setAttribute('name', name);
+                document.head.appendChild(el);
+            }
+            el.setAttribute('content', content);
+        };
 
-            {/* Twitter */}
-            <meta property="twitter:card" content="summary_large_image" />
-            <meta property="twitter:url" content={canonicalUrl} />
-            <meta property="twitter:title" content={fullTitle} />
-            <meta property="twitter:description" content={description} />
-            <meta property="twitter:image" content={image} />
+        const upsertMetaByProperty = (property: string, content: string) => {
+            let el = document.head.querySelector<HTMLMetaElement>(`meta[property="${property}"]`);
+            if (!el) {
+                el = document.createElement('meta');
+                el.setAttribute('property', property);
+                document.head.appendChild(el);
+            }
+            el.setAttribute('content', content);
+        };
 
-            {/* Schema.org for Local Business or Product could go here, passed as a prop */}
-        </Helmet>
-    );
+        const upsertLink = (rel: string, href: string) => {
+            let el = document.head.querySelector<HTMLLinkElement>(`link[rel="${rel}"]`);
+            if (!el) {
+                el = document.createElement('link');
+                el.setAttribute('rel', rel);
+                document.head.appendChild(el);
+            }
+            el.setAttribute('href', href);
+        };
+
+        document.title = fullTitle;
+        upsertMetaByName('description', description);
+        upsertMetaByName('keywords', finalKeywords.join(', '));
+        upsertLink('canonical', canonicalUrl);
+
+        if (noindex) upsertMetaByName('robots', 'noindex, nofollow');
+        else {
+            const existing = document.head.querySelector<HTMLMetaElement>('meta[name="robots"]');
+            if (existing) existing.remove();
+        }
+
+        upsertMetaByProperty('og:type', 'website');
+        upsertMetaByProperty('og:url', canonicalUrl);
+        upsertMetaByProperty('og:title', fullTitle);
+        upsertMetaByProperty('og:description', description);
+        upsertMetaByProperty('og:image', image);
+
+        upsertMetaByProperty('twitter:card', 'summary_large_image');
+        upsertMetaByProperty('twitter:url', canonicalUrl);
+        upsertMetaByProperty('twitter:title', fullTitle);
+        upsertMetaByProperty('twitter:description', description);
+        upsertMetaByProperty('twitter:image', image);
+    }, [canonicalUrl, description, finalKeywords, fullTitle, image, noindex]);
+
+    return null;
 };
 
 export default SEO;

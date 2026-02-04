@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { HelmetProvider } from 'react-helmet-async';
 import { BrowserRouter, Navigate, Route, Routes, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -142,39 +141,37 @@ const AppInner: React.FC = () => {
   }, [routerNavigate]);
 
   return (
-    <HelmetProvider>
-      <div className="flex flex-col min-h-screen font-sans text-gray-900">
-        <Header onNavigate={onNavigate} session={session} />
+    <div className="flex flex-col min-h-screen font-sans text-gray-900">
+      <Header onNavigate={onNavigate} session={session} />
 
-        <main className="flex-grow">
-          <Routes>
-            <Route path="/" element={<Home onNavigate={onNavigate} />} />
-            <Route path="/listing" element={<ListingRoute onNavigate={onNavigate} />} />
-            <Route path="/publish" element={<Publish onNavigate={onNavigate} />} />
-            <Route path="/auth" element={<Auth onNavigate={onNavigate} />} />
-            <Route path="/profile" element={<ProfileRoute onNavigate={onNavigate} />} />
-            <Route path="/user-settings" element={<UserSettings onNavigate={onNavigate} />} />
-            <Route path="/store-settings" element={<StoreSettings onNavigate={onNavigate} />} />
-            <Route
-              path="/dashboard/team"
-              element={
-                <div className="container mx-auto px-4 py-8">
-                  <Team />
-                </div>
-              }
-            />
-            <Route path="/seller-profile/:id" element={<SellerProfileRoute onNavigate={onNavigate} />} />
-            <Route path="/store" element={<StoreRoute onNavigate={onNavigate} />} />
-            <Route path="/store/:id" element={<StoreRoute onNavigate={onNavigate} />} />
-            <Route path="/detail" element={<DetailByIdRoute onNavigate={onNavigate} />} />
-            <Route path="/anuncio/:slug" element={<DetailBySlugRoute onNavigate={onNavigate} />} />
-            <Route path="/:location/:category/:slug" element={<DetailBySlugRoute onNavigate={onNavigate} />} />
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
-    </HelmetProvider>
+      <main className="flex-grow">
+        <Routes>
+          <Route path="/" element={<Home onNavigate={onNavigate} />} />
+          <Route path="/listing" element={<ListingRoute onNavigate={onNavigate} />} />
+          <Route path="/publish" element={<Publish onNavigate={onNavigate} />} />
+          <Route path="/auth" element={<Auth onNavigate={onNavigate} />} />
+          <Route path="/profile" element={<ProfileRoute onNavigate={onNavigate} />} />
+          <Route path="/user-settings" element={<UserSettings onNavigate={onNavigate} />} />
+          <Route path="/store-settings" element={<StoreSettings onNavigate={onNavigate} />} />
+          <Route
+            path="/dashboard/team"
+            element={
+              <div className="container mx-auto px-4 py-8">
+                <Team />
+              </div>
+            }
+          />
+          <Route path="/seller-profile/:id" element={<SellerProfileRoute onNavigate={onNavigate} />} />
+          <Route path="/store" element={<StoreRoute onNavigate={onNavigate} />} />
+          <Route path="/store/:id" element={<StoreRoute onNavigate={onNavigate} />} />
+          <Route path="/detail" element={<DetailByIdRoute onNavigate={onNavigate} />} />
+          <Route path="/anuncio/:slug" element={<DetailBySlugRoute onNavigate={onNavigate} />} />
+          <Route path="/:location/:category/:slug" element={<DetailBySlugRoute onNavigate={onNavigate} />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </main>
+      <Footer />
+    </div>
   );
 };
 
